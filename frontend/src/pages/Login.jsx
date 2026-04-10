@@ -5,7 +5,7 @@ import { Sparkles } from 'lucide-react'
 import '../styles/Auth.css'
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -18,11 +18,11 @@ export default function LoginPage() {
     setIsLoading(true)
 
     try {
-      if (!username.trim() || !password.trim()) {
+      if (!email.trim() || !password.trim()) {
         throw new Error('Please fill in all fields')
       }
 
-      login(username, password)
+      await login(email, password)
       navigate('/dashboard')
     } catch (err) {
       setError(err.message)
@@ -42,13 +42,13 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
             <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
               disabled={isLoading}
             />
           </div>

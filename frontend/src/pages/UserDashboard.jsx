@@ -47,12 +47,8 @@ const seedHabits = () => [
 export default function UserDashboard() {
   const { user, logout } = useAuth()
   const [activePage, setActivePage] = useState('dashboard')
-
-  if (!user) {
-    return <div style={{ padding: '20px' }}>Error: User not found</div>
-  }
-
-  const LS = useMemo(() => createLS(user.id), [user.id])
+  const userId = user?.id ?? 'guest'
+  const LS = useMemo(() => createLS(userId), [userId])
 
   const [tasks, setTasks] = useLocalStorageState(LS.tasks, seedTasks)
   const [habits, setHabits] = useLocalStorageState(LS.habits, seedHabits)
@@ -101,7 +97,7 @@ export default function UserDashboard() {
 
   const sessionsTodayCount = useMemo(() => {
     return sessions.filter((s) => {
-      const sessionDate = isoDate(new Date(s.startedAt ?? Date.now()))
+      const sessionDate = s.startedAt ? isoDate(new Date(s.startedAt)) : todayISO
       return s.type === 'focus' && sessionDate === todayISO
     }).length
   }, [sessions, todayISO])
@@ -199,6 +195,10 @@ export default function UserDashboard() {
     { id: 'scheduler', label: 'Scheduler' },
   ]
 
+  if (!user) {
+    return <div style={{ padding: '20px' }}>Error: User not found</div>
+  }
+
   return (
     <div style={{ display: 'flex', width: '100%', minHeight: '100vh', background: 'var(--bg)' }}>
       {/* Sidebar */}
@@ -218,7 +218,7 @@ export default function UserDashboard() {
             Smart Task Manager
           </h2>
           <p style={{ margin: '0', fontSize: '13px', color: 'var(--text)' }}>
-            Hi, {user.username}!
+            Hi, {user.name || user.username || 'User'}!
           </p>
         </div>
 

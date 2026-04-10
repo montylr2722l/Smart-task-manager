@@ -30,3 +30,6 @@ dist-ssr
 # Ignore ALL .env files anywhere
 **/.env
 **/.env.*
+
+backend/.env
+frontend/.env

@@ -3,6 +3,7 @@ import { useAuth } from './lib/AuthContext'
 import LoginPage from './pages/Login'
 import RegisterPage from './pages/Register'
 import UserDashboard from './pages/UserDashboard'
+import LandingPage from './pages/Landing'
 import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
 import './styles/UIEnhancements.css'
@@ -23,6 +24,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route
@@ -33,8 +35,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* Redirect to dashboard if logged in, otherwise to login */}
-        <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to={user ? '/dashboard' : '/'} replace />} />
       </Routes>
     </Router>
   )

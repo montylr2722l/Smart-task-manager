@@ -86,7 +86,7 @@ export default function Dashboard({
           <Button variant="primary" size="md" onClick={() => onNavigate('tasks')}>
             <Target size={16} /> Continue tasks
           </Button>
-          <Button variant="secondary" size="md" onClick={() => onNavigate('focus')}>
+          <Button variant="secondary" size="md" onClick={() => onNavigate('pomodoro')}>
             <Timer size={16} /> Start focus
           </Button>
         </div>
@@ -140,4 +140,3 @@ export default function Dashboard({
     </div>
   )
 }
-

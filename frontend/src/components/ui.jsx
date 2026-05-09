@@ -83,7 +83,7 @@ export function Modal({ open, title, onClose, children }) {
         <div className="stm-modal-header">
           <div className="stm-modal-title">{title}</div>
           <button className="stm-modal-close" onClick={onClose} aria-label="Close">
-            ×
+            x
           </button>
         </div>
         <div className="stm-modal-body">{children}</div>
@@ -120,4 +120,3 @@ export function EmptyState({ title, description, action }) {
     </div>
   )
 }
-

@@ -200,60 +200,32 @@ export default function UserDashboard() {
   }
 
   return (
-    <div style={{ display: 'flex', width: '100%', minHeight: '100vh', background: 'var(--bg)' }}>
+    <div className="flex min-h-svh w-full max-w-full flex-col overflow-x-hidden bg-[var(--bg)] md:flex-row">
       {/* Sidebar */}
-      <div style={{
-        width: '280px',
-        borderRight: '1px solid var(--border)',
-        padding: '24px 20px',
-        background: 'var(--card)',
-        boxSizing: 'border-box',
-        display: 'flex',
-        flexDirection: 'column',
-        overflowY: 'auto',
-        boxShadow: 'inset -1px 0 0 var(--border)',
-      }}>
-        <div style={{ marginBottom: '24px' }}>
-          <h2 style={{ margin: '0 0 8px 0', fontSize: '18px', fontWeight: '700', color: 'var(--text-h)' }}>
+      <aside className="flex w-full shrink-0 flex-col gap-4 overflow-visible border-b border-[var(--border)] bg-[var(--card)] px-3.5 py-3.5 shadow-[inset_0_-1px_0_var(--border)] md:h-svh md:w-[280px] md:basis-[280px] md:overflow-y-auto md:border-r md:border-b-0 md:px-5 md:py-6 md:shadow-[inset_-1px_0_0_var(--border)]">
+        <div>
+          <h2 className="mb-2 text-base font-bold text-[var(--text-h)] md:text-lg">
             Smart Task Manager
           </h2>
-          <p style={{ margin: '0', fontSize: '13px', color: 'var(--text)' }}>
+          <p className="m-0 text-[13px] text-[var(--text)]">
             Hi, {user.name || user.username || 'User'}!
           </p>
         </div>
 
         {/* Navigation */}
-        <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '24px' }}>
+        <nav
+          className="flex flex-row gap-2 overflow-x-auto pb-1 [-webkit-overflow-scrolling:touch] md:mb-6 md:flex-1 md:flex-col md:gap-1.5 md:overflow-x-visible md:pb-0"
+          aria-label="Dashboard navigation"
+        >
           {navItems.map(item => (
             <button
               key={item.id}
               onClick={() => setActivePage(item.id)}
-              style={{
-                padding: '12px 14px',
-                background: activePage === item.id ? 'var(--accent-bg)' : 'transparent',
-                color: activePage === item.id ? 'var(--accent)' : 'var(--text)',
-                border: activePage === item.id ? '1px solid var(--accent-border)' : 'none',
-                borderRadius: '10px',
-                cursor: 'pointer',
-                fontWeight: activePage === item.id ? '600' : '500',
-                fontSize: '14px',
-                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                textAlign: 'left',
-              }}
-              onMouseEnter={(e) => {
-                if (activePage !== item.id) {
-                  e.target.style.background = 'rgba(170, 59, 255, 0.08)';
-                  e.target.style.color = 'var(--accent)';
-                  e.target.style.transform = 'translateX(4px)';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (activePage !== item.id) {
-                  e.target.style.background = 'transparent';
-                  e.target.style.color = 'var(--text)';
-                  e.target.style.transform = 'translateX(0)';
-                }
-              }}
+              className={`shrink-0 whitespace-nowrap rounded-[10px] border px-3 py-2.5 text-left text-[13px] font-medium transition-all duration-200 md:px-3.5 md:py-3 md:text-sm ${
+                activePage === item.id
+                  ? 'border-[var(--accent-border)] bg-[var(--accent-bg)] text-[var(--accent)] font-semibold'
+                  : 'border-transparent bg-transparent text-[var(--text)] hover:bg-[rgba(170,59,255,0.08)] hover:text-[var(--accent)] md:hover:translate-x-1'
+              }`}
             >
               {item.label}
             </button>
@@ -263,39 +235,15 @@ export default function UserDashboard() {
         {/* Logout Button */}
         <button
           onClick={handleLogout}
-          style={{
-            padding: '12px 14px',
-            background: 'rgba(244, 67, 54, 0.1)',
-            color: '#f44336',
-            border: '1px solid rgba(244, 67, 54, 0.2)',
-            borderRadius: '10px',
-            cursor: 'pointer',
-            fontWeight: '600',
-            fontSize: '14px',
-            transition: 'all 0.2s',
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.background = 'rgba(244, 67, 54, 0.2)';
-            e.target.style.borderColor = 'rgba(244, 67, 54, 0.3)';
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.background = 'rgba(244, 67, 54, 0.1)';
-            e.target.style.borderColor = 'rgba(244, 67, 54, 0.2)';
-          }}
+          className="self-start rounded-[10px] border border-[rgba(244,67,54,0.2)] bg-[rgba(244,67,54,0.1)] px-3 py-2.5 text-[13px] font-semibold text-[#f44336] transition-all hover:border-[rgba(244,67,54,0.3)] hover:bg-[rgba(244,67,54,0.2)] md:w-full md:px-3.5 md:py-3 md:text-sm"
         >
           Logout
         </button>
-      </div>
+      </aside>
 
       {/* Main Content */}
-      <div style={{
-        flex: 1,
-        padding: '32px',
-        overflow: 'auto',
-        background: 'var(--bg)',
-        boxSizing: 'border-box',
-      }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+      <main className="w-full min-w-0 flex-1 bg-[var(--bg)] px-3 py-3.5 md:overflow-auto md:p-8">
+        <div className="mx-auto w-full max-w-[1400px] min-w-0">
           {activePage === 'dashboard' && (
             <DashboardPage 
               todayISO={todayISO}
@@ -360,7 +308,7 @@ export default function UserDashboard() {
             />
           )}
         </div>
-      </div>
+      </main>
     </div>
   )
 }

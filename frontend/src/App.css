@@ -377,6 +377,7 @@
   border-radius: 16px;
   padding: 14px;
   box-shadow: var(--shadow);
+  min-width: 0;
 }
 
 .stm-stretch {
@@ -392,6 +393,7 @@
   justify-content: space-between;
   gap: 12px;
   align-items: center;
+  min-width: 0;
 }
 
 .stm-card-title {
@@ -401,6 +403,8 @@
   color: var(--text-h);
   font-weight: 800;
   letter-spacing: -0.2px;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .stm-grid {
@@ -420,6 +424,7 @@
   justify-content: space-between;
   gap: 14px;
   margin-bottom: 12px;
+  min-width: 0;
 }
 
 .stm-page-title {
@@ -441,6 +446,7 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-end;
+  min-width: 0;
 }
 
 .stm-btn {
@@ -449,9 +455,11 @@
   padding: 10px 12px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   font-weight: 700;
   transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+  min-width: 0;
 }
 
 .stm-btn-md {
@@ -516,6 +524,8 @@
   color: rgba(226, 232, 240, 0.95);
   font-size: 12.5px;
   font-weight: 700;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .stm-pill-neutral {
@@ -661,6 +671,7 @@
   justify-content: flex-end;
   gap: 12px;
   padding-top: 14px;
+  flex-wrap: wrap;
 }
 
 .stm-seg {
@@ -776,6 +787,7 @@
 .stm-task-main {
   display: flex;
   gap: 12px;
+  min-width: 0;
 }
 
 .stm-task-check input {
@@ -789,6 +801,7 @@
   justify-content: space-between;
   gap: 12px;
   align-items: flex-start;
+  min-width: 0;
 }
 
 .stm-task-title {
@@ -796,11 +809,14 @@
   color: var(--text-h);
   letter-spacing: -0.25px;
   line-height: 1.3;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .stm-task-actions {
   display: flex;
   gap: 8px;
+  flex: 0 0 auto;
 }
 
 .stm-task-meta {
@@ -1032,11 +1048,14 @@
   gap: 10px;
   align-items: flex-start;
   margin-top: 8px;
+  min-width: 0;
 }
 
 .stm-sched-title {
   font-weight: 950;
   color: var(--text-h);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .stm-sched-sub {
@@ -1052,6 +1071,7 @@
   margin-top: 12px;
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .stm-sched-meta {
@@ -1063,9 +1083,20 @@
   .stm-app {
     grid-template-columns: 1fr;
     padding: 14px 12px 20px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
   .stm-sidebar {
     min-height: auto;
+  }
+  .stm-main,
+  .stm-content,
+  .stm-grid,
+  .stm-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
   .stm-grid-2 {
     grid-template-columns: 1fr;
@@ -1078,5 +1109,69 @@
   }
   .stm-stat-row {
     grid-template-columns: 1fr;
+  }
+  .stm-page-head,
+  .stm-card-top,
+  .stm-task-title-row,
+  .stm-sched-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .stm-page-actions,
+  .stm-task-actions,
+  .stm-sched-actions {
+    justify-content: flex-start;
+  }
+  .stm-seg {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .stm-task-main {
+    align-items: flex-start;
+  }
+  .stm-task-body {
+    min-width: 0;
+    width: 100%;
+  }
+  .stm-flex {
+    flex-wrap: wrap;
+  }
+  .stm-mini-kpi,
+  .stm-input,
+  .stm-btn {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .stm-app {
+    padding: 12px 10px 18px;
+  }
+  .stm-card,
+  .stm-task-card,
+  .stm-card-compact {
+    padding: 12px;
+  }
+  .stm-pomodoro-time {
+    font-size: 36px;
+  }
+  .stm-btn {
+    width: 100%;
+  }
+  .stm-iconbtn {
+    width: 38px;
+    height: 38px;
+  }
+  .stm-pill {
+    white-space: normal;
+  }
+  .stm-modal {
+    width: min(100%, calc(100vw - 20px));
+    max-height: calc(100svh - 20px);
+    overflow-y: auto;
+  }
+  .stm-modal-footer .stm-btn {
+    width: auto;
+    flex: 1 1 120px;
   }
 }

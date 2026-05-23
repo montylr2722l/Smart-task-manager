@@ -1,8 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState } from 'react'
 
+import { API_BASE_URL } from './api'
+
 const AuthContext = createContext()
-const API_BASE_URL = import.meta.env.VITE_API_URL 
 
 const LS_USER_KEY = 'stm_currentUser'
 const LS_TOKEN_KEY = 'stm_auth_token'

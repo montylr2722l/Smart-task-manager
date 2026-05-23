@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
 const authRoutes = require('./routes/authRoutes')
+const dataRoutes = require('./routes/dataRoutes')
+const sharedRoutes = require('./routes/sharedRoutes')
 
 const app = express()
 
@@ -14,6 +16,8 @@ app.get('/api/health', (req, res) => {
 })
 
 app.use('/api/auth', authRoutes)
+app.use('/api/data', dataRoutes)
+app.use('/api/shared', sharedRoutes)
 
 app.use((req, res) => {
   res.status(404).json({
